@@ -89,25 +89,26 @@ export default function AiConsultPage() {
     setInput("");
     setLoading(true);
 
+    const SYSTEM_PROMPT = `당신은 법무법인 더 에이치 황해의 입주예정자협의회 집단등기 전문 AI 상담사입니다.
+집단등기 절차, 비용, 서류, 일정에 대해 친절하고 정확하게 안내합니다.
+법적 판단이 필요한 복잡한 사항은 "전문 변호사 직접 상담을 권장드립니다"로 안내하세요.
+반드시 한국어로 답변하세요. 간결하고 명확하게 3-5줄 이내로.`;
+
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
-          apiKey,
-        }),
+      const Anthropic = (await import("@anthropic-ai/sdk")).default;
+      const client = new Anthropic({ apiKey, dangerouslyAllowBrowser: true });
+
+      const response = await client.messages.create({
+        model: "claude-haiku-4-5",
+        max_tokens: 1024,
+        system: SYSTEM_PROMPT,
+        messages: newMessages.map((m) => ({ role: m.role, content: m.content })),
       });
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "API 오류");
-      }
-
-      const data = await res.json();
+      const content = response.content[0].type === "text" ? response.content[0].text : "";
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: data.content },
+        { role: "assistant", content },
       ]);
     } catch (e: unknown) {
       const errorMessage = e instanceof Error ? e.message : "알 수 없는 오류";
