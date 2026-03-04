@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface District {
   id: number;
@@ -125,7 +126,7 @@ export default function DistrictsPage() {
           <tbody>
             {districts.map((d, i) => (
               <tr key={d.id} style={{ borderBottom: i < districts.length - 1 ? "1px solid #f3f4f6" : "none" }}>
-                <td style={{ padding: "14px 16px", fontSize: "13px", fontWeight: "600", color: "#1f2937" }}>{d.name}</td>
+                <td style={{ padding: "14px 16px" }}><Link href={`/admin/districts/${d.id}`} style={{ fontSize: "13px", fontWeight: "600", color: "#1B2A3A", textDecoration: "none" }}>{d.name}</Link></td>
                 <td style={{ padding: "14px 16px", fontSize: "13px", color: "#6b7280" }}>{d.units.toLocaleString()}</td>
                 <td style={{ padding: "14px 16px", fontSize: "13px", color: "#374151" }}>{d.region}</td>
                 <td style={{ padding: "14px 16px" }}>

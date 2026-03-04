@@ -34,20 +34,20 @@ function StepIndicator({ current }: { current: number }) {
             <div
               className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all"
               style={{
-                backgroundColor: i < current ? "#22c55e" : i === current ? "#2C3E50" : "#e5e7eb",
+                backgroundColor: i < current ? "#1B2A3A" : i === current ? "#1B2A3A" : "#e5e7eb",
                 color: i <= current ? "white" : "#9ca3af",
               }}
             >
               {i < current ? "✓" : i + 1}
             </div>
             <span className={`text-xs mt-1 ${i === current ? "font-semibold" : "text-gray-400"}`}
-              style={{ color: i === current ? "#2C3E50" : undefined }}>
+              style={{ color: i === current ? "#1B2A3A" : undefined }}>
               {label}
             </span>
           </div>
           {i < steps.length - 1 && (
             <div className="w-16 sm:w-24 h-0.5 mx-2 mb-5 transition-all"
-              style={{ backgroundColor: i < current ? "#22c55e" : "#e5e7eb" }} />
+              style={{ backgroundColor: i < current ? "#1B2A3A" : "#e5e7eb" }} />
           )}
         </div>
       ))}
@@ -121,24 +121,25 @@ export default function RegisterPage() {
   };
 
   const inputCls = "w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 transition-all";
-  const ringStyle = { "--tw-ring-color": "#2C3E50" } as React.CSSProperties;
+  const ringStyle = { "--tw-ring-color": "#1B2A3A" } as React.CSSProperties;
   const errorCls = "text-red-500 text-xs mt-1";
 
   return (
-    <div className="min-h-screen py-12 px-4" style={{ backgroundColor: "#F8F9FA" }}>
-      <div className="max-w-lg mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2" style={{ color: "#2C3E50" }}>집단등기 신청</h1>
-          <p className="text-gray-500">입주예정자협의회 집단등기를 신청해주세요</p>
+    <div className="min-h-screen" style={{ backgroundColor: "#F5F6F8" }}>
+      <div style={{ background: "#1B2A3A", padding: "40px 24px 36px" }}>
+        <div style={{ maxWidth: "520px", margin: "0 auto" }}>
+          <h1 style={{ fontSize: "26px", fontWeight: 700, color: "#fff", letterSpacing: "-0.02em", marginBottom: "6px" }}>집단등기 신청</h1>
+          <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.5)" }}>입주예정자협의회 집단등기를 신청해주세요</p>
         </div>
-
+      </div>
+      <div style={{ maxWidth: "520px", margin: "0 auto", padding: "28px 24px" }}>
         <StepIndicator current={step} />
 
-        <div className="bg-white rounded-2xl p-8 shadow-sm">
+        <div style={{ background: "#fff", border: "1px solid #E2E8F0", borderRadius: "8px", padding: "28px" }}>
           {/* Step 1: 신청자 정보 */}
           {step === 0 && (
             <div>
-              <h2 className="font-bold text-lg mb-6" style={{ color: "#2C3E50" }}>신청자 정보</h2>
+              <h2 className="font-bold text-lg mb-6" style={{ color: "#1B2A3A" }}>신청자 정보</h2>
 
               <div className="space-y-5">
                 {/* 이름 */}
@@ -198,7 +199,7 @@ export default function RegisterPage() {
                     {roles.map((r) => (
                       <label key={r} className="flex items-center gap-2 cursor-pointer border rounded-lg px-3 py-2.5 transition-all"
                         style={{
-                          borderColor: step1.role === r ? "#2C3E50" : "#e5e7eb",
+                          borderColor: step1.role === r ? "#1B2A3A" : "#e5e7eb",
                           backgroundColor: step1.role === r ? "rgba(44,62,80,0.05)" : "transparent",
                         }}>
                         <input
@@ -207,7 +208,7 @@ export default function RegisterPage() {
                           checked={step1.role === r}
                           onChange={() => setStep1({ ...step1, role: r })}
                           className="w-4 h-4"
-                          style={{ accentColor: "#2C3E50" }}
+                          style={{ accentColor: "#1B2A3A" }}
                         />
                         <span className="text-sm font-medium">{r}</span>
                       </label>
@@ -219,7 +220,7 @@ export default function RegisterPage() {
               <button
                 onClick={handleNext}
                 className="mt-8 w-full py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90"
-                style={{ backgroundColor: "#2C3E50", color: "white" }}
+                style={{ backgroundColor: "#1B2A3A", color: "white" }}
               >
                 다음 단계 →
               </button>
@@ -229,7 +230,7 @@ export default function RegisterPage() {
           {/* Step 2: 단지 정보 */}
           {step === 1 && (
             <div>
-              <h2 className="font-bold text-lg mb-6" style={{ color: "#2C3E50" }}>단지 정보</h2>
+              <h2 className="font-bold text-lg mb-6" style={{ color: "#1B2A3A" }}>단지 정보</h2>
 
               <div className="space-y-5">
                 {/* 단지명 */}
@@ -334,15 +335,15 @@ export default function RegisterPage() {
           {step === 2 && (
             <div className="text-center py-6">
               <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl"
-                style={{ backgroundColor: "#22c55e" }}>
+                style={{ backgroundColor: "#1B2A3A" }}>
                 ✓
               </div>
-              <h2 className="text-2xl font-bold mb-2" style={{ color: "#2C3E50" }}>신청이 완료되었습니다!</h2>
+              <h2 className="text-2xl font-bold mb-2" style={{ color: "#1B2A3A" }}>신청이 완료되었습니다!</h2>
               <p className="text-gray-500 mb-6">영업일 2일 내 담당자가 연락드립니다.</p>
 
               <div className="rounded-xl p-5 mb-6" style={{ backgroundColor: "#F8F9FA" }}>
                 <p className="text-sm text-gray-500 mb-1">접수번호</p>
-                <p className="text-3xl font-bold tracking-widest" style={{ color: "#2C3E50" }}>
+                <p className="text-3xl font-bold tracking-widest" style={{ color: "#1B2A3A" }}>
                   {receiptNumber}
                 </p>
               </div>
@@ -358,7 +359,7 @@ export default function RegisterPage() {
               <Link
                 href="/"
                 className="block py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90"
-                style={{ backgroundColor: "#2C3E50", color: "white" }}
+                style={{ backgroundColor: "#1B2A3A", color: "white" }}
               >
                 홈으로 돌아가기
               </Link>

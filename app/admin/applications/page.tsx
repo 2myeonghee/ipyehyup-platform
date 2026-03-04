@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Status = "검토중" | "승인" | "반려";
 
@@ -156,8 +157,10 @@ export default function ApplicationsPage() {
               <tr key={app.id} style={{ borderBottom: i < filtered.length - 1 ? "1px solid #f3f4f6" : "none" }}>
                 <td style={{ padding: "14px 16px", fontSize: "13px", fontWeight: "600", color: "#2C3E50" }}>{app.id}</td>
                 <td style={{ padding: "14px 16px" }}>
-                  <div style={{ fontSize: "13px", fontWeight: "600", color: "#1f2937" }}>{app.name}</div>
-                  <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "2px" }}>{app.phone}</div>
+                  <Link href={`/admin/applications/${app.id}`} style={{ textDecoration: "none" }}>
+                    <div style={{ fontSize: "13px", fontWeight: "600", color: "#1B2A3A" }}>{app.name}</div>
+                    <div style={{ fontSize: "11px", color: "#9ca3af", marginTop: "2px" }}>{app.phone}</div>
+                  </Link>
                 </td>
                 <td style={{ padding: "14px 16px" }}>
                   <span style={{ padding: "2px 8px", borderRadius: "20px", fontSize: "11px", fontWeight: "600", ...roleColor(app.role) }}>
@@ -210,19 +213,14 @@ export default function ApplicationsPage() {
                   {app.status !== "검토중" && (
                     <button
                       onClick={() => updateStatus(app.id, "검토중")}
-                      style={{
-                        padding: "5px 10px",
-                        background: "#f3f4f6",
-                        color: "#6b7280",
-                        border: "1px solid #e5e7eb",
-                        borderRadius: "6px",
-                        fontSize: "12px",
-                        cursor: "pointer",
-                      }}
+                      style={{ padding: "5px 10px", background: "#f3f4f6", color: "#6b7280", border: "1px solid #e5e7eb", borderRadius: "6px", fontSize: "12px", cursor: "pointer" }}
                     >
                       재검토
                     </button>
                   )}
+                  <Link href={`/admin/applications/${app.id}`} style={{ display: "inline-block", padding: "5px 10px", background: "#F5F6F8", color: "#1B2A3A", border: "1px solid #E2E8F0", borderRadius: "6px", fontSize: "12px", fontWeight: 600, textDecoration: "none", marginLeft: "4px" }}>
+                    상세
+                  </Link>
                 </td>
               </tr>
             ))}
