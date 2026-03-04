@@ -14,37 +14,49 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header style={{ backgroundColor: "#2C3E50" }} className="sticky top-0 z-50 shadow-lg">
+    <header
+      className="sticky top-0 z-50"
+      style={{
+        backgroundColor: "#FFFFFF",
+        borderBottom: "1px solid #E2E5EA",
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* 로고 */}
-          <Link href="/" className="flex items-center gap-2 text-white hover:opacity-90 transition-opacity">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm"
-              style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}>
-              에이치
-            </div>
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             <div className="hidden sm:block">
-              <div className="font-bold text-sm leading-tight">법무법인 더 에이치 황해</div>
-              <div className="text-xs text-gray-300">입예협 집단등기 전문</div>
+              <div
+                className="font-bold text-sm leading-tight"
+                style={{ color: "#1B2A3A" }}
+              >
+                법무법인 더 에이치 황해
+              </div>
+              <div className="text-xs" style={{ color: "#6b7280" }}>
+                입예협 집단등기 전문
+              </div>
             </div>
-            <div className="sm:hidden font-bold text-sm">더 에이치 황해</div>
+            <div className="sm:hidden font-bold text-sm" style={{ color: "#1B2A3A" }}>
+              더 에이치 황해
+            </div>
           </Link>
 
           {/* 데스크탑 네비게이션 */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-7">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+                className="text-sm font-semibold transition-colors hover:opacity-70"
+                style={{ color: "#1B2A3A" }}
               >
                 {item.label}
               </Link>
             ))}
             <Link
               href="/register/"
-              className="px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
-              style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+              className="px-4 py-2 rounded-md text-sm font-semibold transition-colors hover:opacity-90"
+              style={{ backgroundColor: "#1B2A3A", color: "#ffffff" }}
             >
               신청하기
             </Link>
@@ -52,27 +64,38 @@ export default function Header() {
 
           {/* 모바일 햄버거 버튼 */}
           <button
-            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden p-2 rounded-lg transition-colors"
+            style={{ color: "#1B2A3A" }}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="메뉴 열기"
           >
             <div className="w-5 h-5 flex flex-col justify-center gap-1">
-              <span className={`block h-0.5 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`} />
-              <span className={`block h-0.5 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-              <span className={`block h-0.5 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
+              <span
+                className={`block h-0.5 transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-1.5" : ""}`}
+                style={{ backgroundColor: "#1B2A3A" }}
+              />
+              <span
+                className={`block h-0.5 transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
+                style={{ backgroundColor: "#1B2A3A" }}
+              />
+              <span
+                className={`block h-0.5 transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
+                style={{ backgroundColor: "#1B2A3A" }}
+              />
             </div>
           </button>
         </div>
 
         {/* 모바일 드롭다운 메뉴 */}
         {menuOpen && (
-          <div className="md:hidden border-t border-white/20 py-4">
+          <div className="md:hidden py-4" style={{ borderTop: "1px solid #E2E5EA" }}>
             <nav className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                  className="px-3 py-2 rounded-lg text-sm font-semibold transition-colors hover:bg-gray-50"
+                  style={{ color: "#1B2A3A" }}
                   onClick={() => setMenuOpen(false)}
                 >
                   {item.label}
@@ -80,8 +103,8 @@ export default function Header() {
               ))}
               <Link
                 href="/register/"
-                className="mt-2 px-4 py-2 rounded-lg text-sm font-semibold text-center transition-colors"
-                style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+                className="mt-2 px-4 py-2 rounded-md text-sm font-semibold text-center transition-colors hover:opacity-90"
+                style={{ backgroundColor: "#1B2A3A", color: "#ffffff" }}
                 onClick={() => setMenuOpen(false)}
               >
                 신청하기

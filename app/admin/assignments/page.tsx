@@ -51,9 +51,9 @@ const lawyers = [
 ];
 
 const statusStyle = (status: string): React.CSSProperties => {
-  if (status === "진행중") return { background: "#dbeafe", color: "#1d4ed8" };
-  if (status === "완료") return { background: "#dcfce7", color: "#166534" };
-  if (status === "준비중") return { background: "#f3f4f6", color: "#6b7280" };
+  if (status === "진행중") return { border: "1px solid #1d4ed8", color: "#1d4ed8", background: "transparent" };
+  if (status === "완료") return { border: "1px solid #166534", color: "#166534", background: "transparent" };
+  if (status === "준비중") return { border: "1px solid #6b7280", color: "#6b7280", background: "transparent" };
   return {};
 };
 
@@ -158,7 +158,7 @@ export default function AssignmentsPage() {
           marginBottom: "24px",
         }}>
           <h3 style={{ fontSize: "14px", fontWeight: "700", color: "#92400e", margin: "0 0 12px" }}>
-            ⚠️ 미배정 단지 ({getUnassigned().length}개)
+            미배정 단지 ({getUnassigned().length}개)
           </h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
             {getUnassigned().map((d) => (
@@ -250,16 +250,17 @@ export default function AssignmentsPage() {
                   {d.lawyer ? (
                     <span style={{
                       padding: "4px 10px",
-                      borderRadius: "20px",
+                      borderRadius: "4px",
                       fontSize: "12px",
                       fontWeight: "600",
-                      background: d.lawyer === "이현준" ? "#ede9fe" : "#e0f2fe",
+                      border: d.lawyer === "이현준" ? "1px solid #5b21b6" : "1px solid #0369a1",
                       color: d.lawyer === "이현준" ? "#5b21b6" : "#0369a1",
+                      background: "transparent",
                     }}>
-                      👨‍⚖️ {d.lawyer}
+                      {d.lawyer}
                     </span>
                   ) : (
-                    <span style={{ fontSize: "12px", color: "#f59e0b", fontWeight: "600" }}>⚠️ 미배정</span>
+                    <span style={{ fontSize: "12px", color: "#ca8a04", fontWeight: "600", border: "1px solid #ca8a04", padding: "2px 8px", borderRadius: "4px" }}>미배정</span>
                   )}
                 </td>
                 <td style={{ padding: "13px 16px" }}>

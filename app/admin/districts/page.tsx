@@ -29,9 +29,9 @@ const initialDistricts: District[] = [
 ];
 
 const statusStyle = (status: string): React.CSSProperties => {
-  if (status === "진행중") return { background: "#dbeafe", color: "#1d4ed8", border: "1px solid #93c5fd" };
-  if (status === "완료") return { background: "#dcfce7", color: "#166534", border: "1px solid #86efac" };
-  if (status === "준비중") return { background: "#f3f4f6", color: "#6b7280", border: "1px solid #d1d5db" };
+  if (status === "진행중") return { border: "1px solid #1d4ed8", color: "#1d4ed8", background: "transparent" };
+  if (status === "완료") return { border: "1px solid #166534", color: "#166534", background: "transparent" };
+  if (status === "준비중") return { border: "1px solid #6b7280", color: "#6b7280", background: "transparent" };
   return {};
 };
 

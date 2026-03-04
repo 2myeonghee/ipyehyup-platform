@@ -9,17 +9,31 @@ const stats = [
 
 const features = [
   {
-    icon: "🤖",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2A3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+    ),
     title: "AI 법률상담",
     desc: "24시간 AI가 집단등기 절차, 비용, 서류에 대해 즉시 답변. 복잡한 법률 용어도 쉽게 설명합니다.",
   },
   {
-    icon: "📊",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2A3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
+      </svg>
+    ),
     title: "실시간 진행현황",
     desc: "단지별 등기 진행 현황을 실시간으로 확인. 어느 단계에 있는지 투명하게 공개합니다.",
   },
   {
-    icon: "⚖️",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2A3A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+    ),
     title: "전문 변호사 직접 처리",
     desc: "중개 없이 담당 변호사가 직접 집단등기 전 과정을 처리. 책임감 있는 서비스를 제공합니다.",
   },
@@ -39,13 +53,21 @@ const previewDistricts = [
 ];
 
 function StatusBadge({ status }: { status: string }) {
-  const colorMap: Record<string, string> = {
-    "진행중": "bg-blue-100 text-blue-700",
-    "완료": "bg-green-100 text-green-700",
-    "예정": "bg-gray-100 text-gray-600",
+  const styleMap: Record<string, React.CSSProperties> = {
+    "진행중": { border: "1px solid #1d4ed8", color: "#1d4ed8", background: "transparent" },
+    "완료": { border: "1px solid #166534", color: "#166534", background: "transparent" },
+    "예정": { border: "1px solid #6b7280", color: "#6b7280", background: "transparent" },
   };
   return (
-    <span className={`px-2 py-0.5 rounded-full text-xs font-semibold ${colorMap[status] || "bg-gray-100 text-gray-600"}`}>
+    <span
+      style={{
+        padding: "2px 8px",
+        borderRadius: "4px",
+        fontSize: "11px",
+        fontWeight: "600",
+        ...( styleMap[status] ?? { border: "1px solid #6b7280", color: "#6b7280", background: "transparent" }),
+      }}
+    >
       {status}
     </span>
   );
@@ -56,37 +78,50 @@ export default function HomePage() {
     <div>
       {/* 히어로 섹션 */}
       <section
-        className="relative text-white py-24 px-4 text-center overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #2C3E50 0%, #3d5166 60%, #4a6580 100%)" }}
+        className="relative text-white py-28 px-4 text-center overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #1B2A3A 0%, #243649 60%, #2d4460 100%)" }}
       >
-        <div className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #C9A84C 0%, transparent 50%)" }} />
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{ backgroundImage: "radial-gradient(circle at 20% 50%, #C4973A 0%, transparent 50%)" }}
+        />
         <div className="relative max-w-4xl mx-auto">
-          <div className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold mb-6"
-            style={{ backgroundColor: "rgba(201,168,76,0.2)", color: "#C9A84C", border: "1px solid rgba(201,168,76,0.4)" }}>
+          <div
+            className="inline-block px-4 py-1.5 text-xs font-semibold mb-8 tracking-wide"
+            style={{
+              backgroundColor: "rgba(196,151,58,0.15)",
+              color: "#C4973A",
+              border: "1px solid rgba(196,151,58,0.35)",
+              borderRadius: "2px",
+            }}
+          >
             법무법인 더 에이치 황해 · 입예협 집단등기 전문
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-6">
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl leading-tight mb-6"
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 900 }}
+          >
             입주예정자협의회 집단등기,<br />
-            <span style={{ color: "#C9A84C" }}>디지털로 완성합니다</span>
+            <span style={{ color: "#C4973A" }}>디지털로 완성합니다</span>
           </h1>
-          <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+          <p className="text-lg mb-10 max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.75)" }}>
             AI 법률상담부터 실시간 진행현황, 취득세 계산까지.<br />
             전국 최다 집단등기 실적, 법무법인 더 에이치 황해가 함께합니다.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/register/"
-              className="px-8 py-3.5 rounded-xl font-bold text-base transition-all hover:opacity-90 active:scale-95"
-              style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+              className="px-8 py-3.5 font-bold text-base transition-all hover:opacity-90"
+              style={{ backgroundColor: "#C4973A", color: "#1B2A3A", borderRadius: "4px" }}
             >
-              집단등기 신청하기 →
+              집단등기 신청하기 &rarr;
             </Link>
             <Link
               href="/ai-consult/"
-              className="px-8 py-3.5 rounded-xl font-bold text-base border-2 border-white/30 hover:border-white/60 transition-all active:scale-95"
+              className="px-8 py-3.5 font-bold text-base border-2 transition-all"
+              style={{ borderColor: "rgba(255,255,255,0.35)", color: "#ffffff", borderRadius: "4px" }}
             >
-              🤖 AI 상담 시작하기
+              AI 상담 시작하기
             </Link>
           </div>
         </div>
@@ -96,9 +131,21 @@ export default function HomePage() {
       <section className="py-12 px-4" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {stats.map((s) => (
-            <div key={s.label} className="bg-white rounded-xl p-6 shadow-sm">
-              <div className="text-3xl font-bold mb-1" style={{ color: "#2C3E50" }}>{s.value}</div>
-              <div className="text-sm text-gray-500">{s.label}</div>
+            <div
+              key={s.label}
+              className="bg-white p-6"
+              style={{
+                border: "1px solid #E2E5EA",
+                borderBottom: "3px solid #C4973A",
+              }}
+            >
+              <div
+                className="text-3xl font-bold mb-1"
+                style={{ color: "#1B2A3A", fontFamily: "var(--font-serif)" }}
+              >
+                {s.value}
+              </div>
+              <div className="text-sm" style={{ color: "#6b7280" }}>{s.label}</div>
             </div>
           ))}
         </div>
@@ -107,15 +154,24 @@ export default function HomePage() {
       {/* 특징 카드 */}
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: "#2C3E50" }}>왜 더 에이치 황해인가요?</h2>
-          <p className="text-gray-500">집단등기 전 과정을 디지털로 혁신합니다</p>
+          <h2
+            className="text-2xl sm:text-3xl mb-3"
+            style={{ color: "#1B2A3A", fontFamily: "var(--font-serif)", fontWeight: 700 }}
+          >
+            왜 더 에이치 황해인가요?
+          </h2>
+          <p style={{ color: "#6b7280" }}>집단등기 전 과정을 디지털로 혁신합니다</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((f) => (
-            <div key={f.title} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="text-4xl mb-4">{f.icon}</div>
-              <h3 className="font-bold text-lg mb-3" style={{ color: "#2C3E50" }}>{f.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+            <div
+              key={f.title}
+              className="bg-white p-8 hover:shadow-md transition-shadow"
+              style={{ border: "1px solid #E2E5EA" }}
+            >
+              <div className="mb-5">{f.icon}</div>
+              <h3 className="font-bold text-lg mb-3" style={{ color: "#1B2A3A" }}>{f.title}</h3>
+              <p className="text-sm leading-relaxed" style={{ color: "#6b7280" }}>{f.desc}</p>
             </div>
           ))}
         </div>
@@ -125,22 +181,34 @@ export default function HomePage() {
       <section className="py-16 px-4" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: "#2C3E50" }}>집단등기 진행 절차</h2>
-            <p className="text-gray-500">4단계로 완료되는 간편한 프로세스</p>
+            <h2
+              className="text-2xl sm:text-3xl mb-3"
+              style={{ color: "#1B2A3A", fontFamily: "var(--font-serif)", fontWeight: 700 }}
+            >
+              집단등기 진행 절차
+            </h2>
+            <p style={{ color: "#6b7280" }}>4단계로 완료되는 간편한 프로세스</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {steps.map((s, i) => (
               <div key={s.step} className="relative">
-                <div className="bg-white rounded-xl p-6 text-center shadow-sm h-full">
-                  <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-white text-sm"
-                    style={{ backgroundColor: "#2C3E50" }}>
+                <div className="bg-white p-6 h-full" style={{ border: "1px solid #E2E5EA" }}>
+                  <div
+                    className="text-sm font-bold mb-3 tracking-widest"
+                    style={{ color: "#C4973A" }}
+                  >
                     {s.step}
                   </div>
-                  <h3 className="font-bold mb-2" style={{ color: "#2C3E50" }}>{s.title}</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">{s.desc}</p>
+                  <h3 className="font-bold mb-2" style={{ color: "#1B2A3A" }}>{s.title}</h3>
+                  <p className="text-xs leading-relaxed" style={{ color: "#6b7280" }}>{s.desc}</p>
                 </div>
                 {i < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 text-gray-300 text-xl">→</div>
+                  <div
+                    className="hidden md:block absolute top-1/2 -right-2 transform -translate-y-1/2 z-10 text-xl"
+                    style={{ color: "#d1d5db" }}
+                  >
+                    &rarr;
+                  </div>
                 )}
               </div>
             ))}
@@ -152,37 +220,49 @@ export default function HomePage() {
       <section className="py-16 px-4 max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: "#2C3E50" }}>담당단지 현황</h2>
-            <p className="text-gray-500 text-sm mt-1">현재 진행 중인 집단등기 단지</p>
+            <h2
+              className="text-2xl sm:text-3xl font-bold"
+              style={{ color: "#1B2A3A", fontFamily: "var(--font-serif)" }}
+            >
+              담당단지 현황
+            </h2>
+            <p className="text-sm mt-1" style={{ color: "#6b7280" }}>현재 진행 중인 집단등기 단지</p>
           </div>
-          <Link href="/districts/" className="text-sm font-medium hover:underline" style={{ color: "#2C3E50" }}>
-            전체보기 →
+          <Link href="/districts/" className="text-sm font-medium hover:underline" style={{ color: "#1B2A3A" }}>
+            전체보기 &rarr;
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {previewDistricts.map((d) => (
-            <Link key={d.id} href={`/districts/${d.id}/`}
-              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all hover:-translate-y-0.5">
+            <Link
+              key={d.id}
+              href={`/districts/${d.id}/`}
+              className="bg-white p-6 hover:shadow-md transition-all hover:-translate-y-0.5"
+              style={{ border: "1px solid #E2E5EA" }}
+            >
               <div className="flex items-start justify-between mb-3">
                 <div>
-                  <h3 className="font-bold text-base" style={{ color: "#2C3E50" }}>{d.name}</h3>
-                  <p className="text-xs text-gray-400 mt-0.5">{d.location} · {d.units.toLocaleString()}세대</p>
+                  <h3 className="font-bold text-base" style={{ color: "#1B2A3A" }}>{d.name}</h3>
+                  <p className="text-xs mt-0.5" style={{ color: "#9ca3af" }}>{d.location} · {d.units.toLocaleString()}세대</p>
                 </div>
                 <StatusBadge status={d.status} />
               </div>
               <div className="mb-3">
-                <div className="flex justify-between text-xs text-gray-400 mb-1">
+                <div className="flex justify-between text-xs mb-1" style={{ color: "#9ca3af" }}>
                   <span>진행률</span>
                   <span>{d.progress}%</span>
                 </div>
-                <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#E2E5EA" }}>
                   <div
                     className="h-full rounded-full transition-all"
-                    style={{ width: `${d.progress}%`, backgroundColor: d.status === "완료" ? "#22c55e" : "#3b82f6" }}
+                    style={{
+                      width: `${d.progress}%`,
+                      backgroundColor: d.status === "완료" ? "#166534" : "#1B2A3A",
+                    }}
                   />
                 </div>
               </div>
-              <p className="text-xs text-gray-500">담당: {d.attorney}</p>
+              <p className="text-xs" style={{ color: "#6b7280" }}>담당: {d.attorney}</p>
             </Link>
           ))}
         </div>
@@ -190,23 +270,37 @@ export default function HomePage() {
 
       {/* CTA 배너 */}
       <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto rounded-2xl p-10 text-center text-white"
-          style={{ background: "linear-gradient(135deg, #2C3E50, #4a6580)" }}>
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3">집단등기, 지금 바로 시작하세요</h2>
-          <p className="text-gray-300 mb-8">영업일 2일 내 전담 변호사가 직접 연락드립니다</p>
+        <div
+          className="max-w-4xl mx-auto p-12 text-center text-white"
+          style={{ background: "linear-gradient(135deg, #1B2A3A, #2d4460)" }}
+        >
+          <h2
+            className="text-2xl sm:text-3xl mb-3"
+            style={{ fontFamily: "var(--font-serif)", fontWeight: 700 }}
+          >
+            집단등기, 지금 바로 시작하세요
+          </h2>
+          <p className="mb-8" style={{ color: "rgba(255,255,255,0.7)" }}>
+            영업일 2일 내 전담 변호사가 직접 연락드립니다
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/register/"
-              className="px-8 py-3.5 rounded-xl font-bold text-base transition-all hover:opacity-90"
-              style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+              className="px-8 py-3.5 font-bold text-base transition-all hover:opacity-90"
+              style={{ backgroundColor: "#C4973A", color: "#1B2A3A", borderRadius: "4px" }}
             >
               신청서 작성하기
             </Link>
             <a
               href="tel:032-251-1000"
-              className="px-8 py-3.5 rounded-xl font-bold text-base border-2 border-white/40 hover:border-white transition-all"
+              className="px-8 py-3.5 font-bold text-base transition-all"
+              style={{
+                border: "1px solid rgba(255,255,255,0.4)",
+                color: "#ffffff",
+                borderRadius: "4px",
+              }}
             >
-              📞 032-251-1000
+              032-251-1000
             </a>
           </div>
         </div>

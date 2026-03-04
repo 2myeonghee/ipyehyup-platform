@@ -30,9 +30,9 @@ const initialApps: Application[] = [
 ];
 
 const statusStyle = (status: string): React.CSSProperties => {
-  if (status === "검토중") return { background: "#fef9c3", color: "#854d0e", border: "1px solid #fde047" };
-  if (status === "승인") return { background: "#dcfce7", color: "#166534", border: "1px solid #86efac" };
-  if (status === "반려") return { background: "#fee2e2", color: "#991b1b", border: "1px solid #fca5a5" };
+  if (status === "검토중") return { border: "1px solid #ca8a04", color: "#854d0e", background: "transparent" };
+  if (status === "승인") return { border: "1px solid #166534", color: "#166534", background: "transparent" };
+  if (status === "반려") return { border: "1px solid #dc2626", color: "#991b1b", background: "transparent" };
   return {};
 };
 
@@ -108,7 +108,11 @@ export default function ApplicationsPage() {
         alignItems: "center",
       }}>
         <div style={{ position: "relative", flex: 1 }}>
-          <span style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", fontSize: "16px" }}>🔍</span>
+          <span style={{ position: "absolute", left: "12px", top: "50%", transform: "translateY(-50%)", color: "#9ca3af" }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </span>
           <input
             type="text"
             placeholder="신청자명 또는 단지명으로 검색..."

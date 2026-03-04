@@ -26,17 +26,35 @@ const recentActivity = [
 ];
 
 const kpiCards = [
-  { label: "총 신청건수", value: "28", icon: "📋", color: "#3b82f6", bg: "#eff6ff" },
-  { label: "진행중 단지", value: "4", icon: "🏗️", color: "#f59e0b", bg: "#fffbeb" },
-  { label: "완료 단지", value: "7", icon: "✅", color: "#10b981", bg: "#ecfdf5" },
-  { label: "이번달 신청", value: "12", icon: "📅", color: "#8b5cf6", bg: "#f5f3ff" },
+  { label: "총 신청건수", value: "28", accent: "#1B2A3A" },
+  { label: "진행중 단지", value: "4", accent: "#C4973A" },
+  { label: "완료 단지", value: "7", accent: "#166534" },
+  { label: "이번달 신청", value: "12", accent: "#1d4ed8" },
 ];
 
-const statusStyle = (status: string) => {
-  if (status === "검토중") return { background: "#fef9c3", color: "#854d0e", border: "1px solid #fde047" };
-  if (status === "승인") return { background: "#dcfce7", color: "#166534", border: "1px solid #86efac" };
-  if (status === "반려") return { background: "#fee2e2", color: "#991b1b", border: "1px solid #fca5a5" };
+const statusStyle = (status: string): React.CSSProperties => {
+  if (status === "검토중") return { border: "1px solid #ca8a04", color: "#854d0e", background: "transparent" };
+  if (status === "승인") return { border: "1px solid #166534", color: "#166534", background: "transparent" };
+  if (status === "반려") return { border: "1px solid #dc2626", color: "#991b1b", background: "transparent" };
   return {};
+};
+
+const activityDot = (type: string): React.CSSProperties => {
+  const colorMap: Record<string, string> = {
+    new: "#1B2A3A",
+    approve: "#166534",
+    reject: "#dc2626",
+    update: "#C4973A",
+    notice: "#1d4ed8",
+  };
+  return {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    background: colorMap[type] ?? "#9ca3af",
+    flexShrink: 0,
+    marginTop: "5px",
+  };
 };
 
 export default function AdminDashboard() {
@@ -52,32 +70,16 @@ export default function AdminDashboard() {
         {kpiCards.map((card) => (
           <div key={card.label} style={{
             background: "#fff",
-            borderRadius: "12px",
+            borderRadius: "4px",
             padding: "20px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
-            display: "flex",
-            alignItems: "center",
-            gap: "16px",
+            border: "1px solid #e5e7eb",
+            borderBottom: `3px solid ${card.accent}`,
           }}>
-            <div style={{
-              width: "48px",
-              height: "48px",
-              background: card.bg,
-              borderRadius: "10px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: "22px",
-            }}>
-              {card.icon}
+            <div style={{ fontSize: "28px", fontWeight: "700", color: "#1f2937", lineHeight: 1.1 }}>
+              {card.value}
             </div>
-            <div>
-              <div style={{ fontSize: "26px", fontWeight: "700", color: card.color, lineHeight: 1 }}>
-                {card.value}
-              </div>
-              <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
-                {card.label}
-              </div>
+            <div style={{ fontSize: "12px", color: "#6b7280", marginTop: "6px" }}>
+              {card.label}
             </div>
           </div>
         ))}
@@ -89,13 +91,13 @@ export default function AdminDashboard() {
           {/* 최근 신청 목록 */}
           <div style={{
             background: "#fff",
-            borderRadius: "12px",
+            borderRadius: "4px",
             padding: "20px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
+            border: "1px solid #e5e7eb",
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
               <h3 style={{ fontSize: "15px", fontWeight: "600", color: "#1f2937", margin: 0 }}>최근 신청 현황</h3>
-              <a href="/admin/applications" style={{ fontSize: "12px", color: "#2C3E50", textDecoration: "none" }}>전체 보기 →</a>
+              <a href="/admin/applications" style={{ fontSize: "12px", color: "#1B2A3A", textDecoration: "none" }}>전체 보기 &rarr;</a>
             </div>
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead>
@@ -110,14 +112,14 @@ export default function AdminDashboard() {
               <tbody>
                 {recentApps.map((app) => (
                   <tr key={app.id} style={{ borderBottom: "1px solid #f9fafb" }}>
-                    <td style={{ padding: "10px 12px", fontSize: "13px", color: "#2C3E50", fontWeight: "600" }}>{app.id}</td>
+                    <td style={{ padding: "10px 12px", fontSize: "13px", color: "#1B2A3A", fontWeight: "600" }}>{app.id}</td>
                     <td style={{ padding: "10px 12px", fontSize: "13px", color: "#374151" }}>{app.name}</td>
                     <td style={{ padding: "10px 12px", fontSize: "13px", color: "#374151" }}>{app.apt}</td>
                     <td style={{ padding: "10px 12px", fontSize: "13px", color: "#6b7280" }}>{app.date}</td>
                     <td style={{ padding: "10px 12px" }}>
                       <span style={{
                         padding: "3px 8px",
-                        borderRadius: "20px",
+                        borderRadius: "4px",
                         fontSize: "11px",
                         fontWeight: "600",
                         ...statusStyle(app.status),
@@ -134,25 +136,25 @@ export default function AdminDashboard() {
           {/* 단지별 진행 현황 */}
           <div style={{
             background: "#fff",
-            borderRadius: "12px",
+            borderRadius: "4px",
             padding: "20px",
-            boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
+            border: "1px solid #e5e7eb",
           }}>
             <h3 style={{ fontSize: "15px", fontWeight: "600", color: "#1f2937", margin: "0 0 16px" }}>단지별 진행 현황</h3>
             {districtProgress.map((d) => (
               <div key={d.name} style={{ marginBottom: "16px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
                   <span style={{ fontSize: "13px", color: "#374151", fontWeight: "500" }}>{d.name}</span>
-                  <span style={{ fontSize: "13px", fontWeight: "700", color: d.progress === 100 ? "#10b981" : "#2C3E50" }}>
+                  <span style={{ fontSize: "13px", fontWeight: "700", color: d.progress === 100 ? "#166534" : "#1B2A3A" }}>
                     {d.progress}%
                   </span>
                 </div>
-                <div style={{ height: "8px", background: "#f3f4f6", borderRadius: "4px", overflow: "hidden" }}>
+                <div style={{ height: "6px", background: "#f3f4f6", borderRadius: "3px", overflow: "hidden" }}>
                   <div style={{
                     height: "100%",
                     width: `${d.progress}%`,
-                    background: d.progress === 100 ? "#10b981" : "linear-gradient(90deg, #2C3E50, #C9A84C)",
-                    borderRadius: "4px",
+                    background: d.progress === 100 ? "#166534" : "#1B2A3A",
+                    borderRadius: "3px",
                     transition: "width 0.5s ease",
                   }} />
                 </div>
@@ -164,36 +166,27 @@ export default function AdminDashboard() {
         {/* 오른쪽: 최근 활동 피드 */}
         <div style={{
           background: "#fff",
-          borderRadius: "12px",
+          borderRadius: "4px",
           padding: "20px",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
+          border: "1px solid #e5e7eb",
           height: "fit-content",
         }}>
           <h3 style={{ fontSize: "15px", fontWeight: "600", color: "#1f2937", margin: "0 0 16px" }}>최근 활동</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {recentActivity.map((act, i) => {
-              const iconMap: Record<string, string> = {
-                new: "📥",
-                approve: "✅",
-                reject: "❌",
-                update: "🔄",
-                notice: "📢",
-              };
-              return (
-                <div key={i} style={{
-                  display: "flex",
-                  gap: "12px",
-                  padding: "12px 0",
-                  borderBottom: i < recentActivity.length - 1 ? "1px solid #f3f4f6" : "none",
-                }}>
-                  <div style={{ fontSize: "18px", marginTop: "1px" }}>{iconMap[act.type]}</div>
-                  <div>
-                    <p style={{ fontSize: "12px", color: "#374151", margin: "0 0 4px", lineHeight: "1.5" }}>{act.text}</p>
-                    <span style={{ fontSize: "11px", color: "#9ca3af" }}>{act.time}</span>
-                  </div>
+            {recentActivity.map((act, i) => (
+              <div key={i} style={{
+                display: "flex",
+                gap: "12px",
+                padding: "12px 0",
+                borderBottom: i < recentActivity.length - 1 ? "1px solid #f3f4f6" : "none",
+              }}>
+                <div style={activityDot(act.type)} />
+                <div>
+                  <p style={{ fontSize: "12px", color: "#374151", margin: "0 0 4px", lineHeight: "1.5" }}>{act.text}</p>
+                  <span style={{ fontSize: "11px", color: "#9ca3af" }}>{act.time}</span>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -56,9 +56,9 @@ const sampleNotices: Notice[] = [
 ];
 
 const priorityStyle = (p: Priority): React.CSSProperties => {
-  if (p === "긴급") return { background: "#fee2e2", color: "#dc2626", border: "1px solid #fca5a5" };
-  if (p === "중요") return { background: "#fef9c3", color: "#ca8a04", border: "1px solid #fde047" };
-  return { background: "#f3f4f6", color: "#6b7280", border: "1px solid #e5e7eb" };
+  if (p === "긴급") return { border: "1px solid #dc2626", color: "#dc2626", background: "transparent" };
+  if (p === "중요") return { border: "1px solid #ca8a04", color: "#ca8a04", background: "transparent" };
+  return { border: "1px solid #6b7280", color: "#6b7280", background: "transparent" };
 };
 
 export default function NoticesPage() {
@@ -251,7 +251,6 @@ export default function NoticesPage() {
           <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {districtNotices.length === 0 ? (
               <div style={{ background: "#fff", borderRadius: "12px", padding: "40px", textAlign: "center", boxShadow: "0 1px 3px rgba(0,0,0,0.07)" }}>
-                <div style={{ fontSize: "32px", marginBottom: "12px" }}>📢</div>
                 <p style={{ fontSize: "14px", color: "#6b7280", margin: 0 }}>이 단지에 등록된 공지가 없습니다.</p>
               </div>
             ) : (
@@ -272,10 +271,15 @@ export default function NoticesPage() {
                     </div>
                     <button
                       onClick={() => handleDelete(notice.id)}
-                      style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", fontSize: "18px", padding: "0" }}
+                      style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", padding: "0", display: "flex" }}
                       title="삭제"
                     >
-                      🗑️
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="3 6 5 6 21 6" />
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                        <path d="M10 11v6" /><path d="M14 11v6" />
+                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                      </svg>
                     </button>
                   </div>
                   <p style={{ fontSize: "13px", color: "#6b7280", margin: "0 0 8px", lineHeight: "1.6" }}>{notice.content}</p>
