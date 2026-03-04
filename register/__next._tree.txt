@@ -1,0 +1,4 @@
+:HL["/ipyehyup-platform/_next/static/chunks/802ad8511c7f6205.css","style"]
+:HL["/ipyehyup-platform/_next/static/chunks/4e696d7a5a2ac536.css","style"]
+:HL["/ipyehyup-platform/_next/static/media/fca78c2ee6cec166-s.p.11a55858.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"buildId":"no7-_DODxxtJO5U_iJJtJ","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"register","paramType":null,"paramKey":"register","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
