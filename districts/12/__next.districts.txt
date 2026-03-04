@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
 2:I[39756,["/ipyehyup-platform/_next/static/chunks/ff1a16fafef87110.js","/ipyehyup-platform/_next/static/chunks/2b423cf30d3964a3.js"],"default"]
 3:I[37457,["/ipyehyup-platform/_next/static/chunks/ff1a16fafef87110.js","/ipyehyup-platform/_next/static/chunks/2b423cf30d3964a3.js"],"default"]
-0:{"buildId":"OQzlO0tlBtgBcBsPRkGLc","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+0:{"buildId":"ZFTTvt1tR2VhXF-wi_QNP","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
