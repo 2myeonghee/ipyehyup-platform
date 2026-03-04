@@ -149,7 +149,7 @@ export default function DistrictsPage() {
                         max={100}
                         value={editProgress}
                         onChange={(e) => setEditProgress(parseInt(e.target.value))}
-                        style={{ width: "100px", marginRight: "8px", accentColor: "#C9A84C" }}
+                        style={{ width: "100px", marginRight: "8px", accentColor: "#1B2A3A" }}
                       />
                       <span style={{ fontSize: "13px", fontWeight: "700", color: "#2C3E50" }}>{editProgress}%</span>
                     </div>
@@ -160,7 +160,7 @@ export default function DistrictsPage() {
                           <div style={{
                             height: "100%",
                             width: `${d.progress}%`,
-                            background: d.progress === 100 ? "#10b981" : "linear-gradient(90deg, #2C3E50, #C9A84C)",
+                            background: d.progress === 100 ? "#10b981" : "linear-gradient(90deg, #2C3E50, #1B2A3A)",
                             borderRadius: "3px",
                           }} />
                         </div>

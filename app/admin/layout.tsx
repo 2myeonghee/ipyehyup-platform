@@ -9,9 +9,9 @@ const menuItems = [
     href: "/admin",
     label: "대시보드",
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" />
-        <rect x="3" y="14" width="7" height="7" /><rect x="14" y="14" width="7" height="7" />
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" />
       </svg>
     ),
   },
@@ -19,12 +19,8 @@ const menuItems = [
     href: "/admin/applications",
     label: "신청관리",
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
-        <line x1="16" y1="13" x2="8" y2="13" />
-        <line x1="16" y1="17" x2="8" y2="17" />
-        <polyline points="10 9 9 9 8 9" />
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
       </svg>
     ),
   },
@@ -32,11 +28,8 @@ const menuItems = [
     href: "/admin/districts",
     label: "단지관리",
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="9" width="18" height="13" rx="1" />
-        <path d="M3 9l9-6 9 6" />
-        <line x1="9" y1="22" x2="9" y2="12" />
-        <line x1="15" y1="22" x2="15" y2="12" />
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M3 21h18M6 21V8l6-5 6 5v13M10 21v-4h4v4" />
       </svg>
     ),
   },
@@ -44,11 +37,8 @@ const menuItems = [
     href: "/admin/assignments",
     label: "변호사배정",
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" />
       </svg>
     ),
   },
@@ -56,23 +46,18 @@ const menuItems = [
     href: "/admin/notices",
     label: "공지관리",
     icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
       </svg>
     ),
   },
 ];
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [adminName, setAdminName] = useState("관리자");
   const [mounted, setMounted] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -82,78 +67,74 @@ export default function AdminLayout({
     }
   }, [pathname, router]);
 
+  if (!mounted) return null;
+  if (pathname === "/admin/login") return <>{children}</>;
+
   const handleLogout = () => {
     localStorage.removeItem("admin_token");
     router.replace("/admin/login");
   };
 
-  if (pathname === "/admin/login") {
-    return <>{children}</>;
-  }
-
-  if (!mounted) {
-    return (
-      <div style={{ minHeight: "100vh", background: "#F8F9FA", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ color: "#1B2A3A", fontSize: "14px" }}>로딩 중...</div>
-      </div>
-    );
-  }
-
-  const isActive = (href: string) => {
-    if (href === "/admin") return pathname === "/admin";
-    return pathname.startsWith(href);
-  };
-
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#F1F5F9" }}>
+    <div style={{ display: "flex", minHeight: "100vh", background: "#F5F6F8" }}>
+      {/* 사이드바 오버레이 (모바일) */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden"
+          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)", zIndex: 40 }}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* 사이드바 */}
-      <aside style={{
-        width: "240px",
-        minWidth: "240px",
-        background: "#0F172A",
-        display: "flex",
-        flexDirection: "column",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        height: "100vh",
-        zIndex: 100,
-      }}>
+      <aside
+        style={{
+          width: "220px",
+          background: "#0F172A",
+          display: "flex",
+          flexDirection: "column",
+          flexShrink: 0,
+          position: "fixed",
+          top: 0,
+          left: sidebarOpen ? 0 : undefined,
+          height: "100vh",
+          zIndex: 50,
+          transition: "left 0.2s",
+        }}
+        className={`hidden lg:flex ${sidebarOpen ? "!flex" : ""}`}
+      >
         {/* 로고 */}
-        <div style={{ padding: "24px 20px", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-          <div>
-            <div style={{ color: "#fff", fontWeight: "700", fontSize: "14px", lineHeight: "1.3" }}>
-              더 에이치 황해
-            </div>
-            <div style={{ color: "#C4973A", fontSize: "11px", marginTop: "3px", fontWeight: "500" }}>
-              관리자 패널
-            </div>
-          </div>
+        <div style={{ padding: "24px 20px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+          <div style={{ fontSize: "14px", fontWeight: 700, color: "#fff", letterSpacing: "-0.02em" }}>더에이치 황해</div>
+          <div style={{ fontSize: "11px", color: "#475569", marginTop: "2px", fontWeight: 500 }}>관리자</div>
         </div>
 
-        {/* 메뉴 */}
-        <nav style={{ padding: "12px 0", flex: 1 }}>
+        {/* 내비 */}
+        <nav style={{ flex: 1, padding: "16px 12px", display: "flex", flexDirection: "column", gap: "2px" }}>
           {menuItems.map((item) => {
-            const active = isActive(item.href);
+            const active = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => setSidebarOpen(false)}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "12px",
-                  padding: "11px 20px",
-                  color: active ? "#fff" : "rgba(255,255,255,0.55)",
+                  gap: "10px",
+                  padding: "9px 12px",
+                  borderRadius: "6px",
                   textDecoration: "none",
-                  fontSize: "14px",
-                  fontWeight: active ? "600" : "400",
+                  fontSize: "13px",
+                  fontWeight: active ? 600 : 400,
+                  color: active ? "#fff" : "#64748B",
                   background: active ? "#1E293B" : "transparent",
-                  borderLeft: active ? "3px solid #C4973A" : "3px solid transparent",
-                  transition: "all 0.15s",
+                  borderLeft: active ? "2px solid #fff" : "2px solid transparent",
+                  transition: "all 0.1s",
+                  letterSpacing: "-0.01em",
                 }}
               >
-                <span style={{ display: "flex", flexShrink: 0 }}>{item.icon}</span>
+                {item.icon}
                 {item.label}
               </Link>
             );
@@ -161,103 +142,62 @@ export default function AdminLayout({
         </nav>
 
         {/* 로그아웃 */}
-        <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+        <div style={{ padding: "16px 12px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           <button
             onClick={handleLogout}
             style={{
+              width: "100%",
+              padding: "9px 12px",
+              background: "none",
+              border: "none",
+              color: "#475569",
+              fontSize: "13px",
+              cursor: "pointer",
+              textAlign: "left",
+              borderRadius: "6px",
               display: "flex",
               alignItems: "center",
               gap: "10px",
-              color: "rgba(255,255,255,0.45)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "14px",
-              padding: "8px 0",
-              width: "100%",
+              letterSpacing: "-0.01em",
             }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-              <polyline points="16 17 21 12 16 7" />
-              <line x1="21" y1="12" x2="9" y2="12" />
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
             </svg>
             로그아웃
           </button>
         </div>
       </aside>
 
-      {/* 메인 컨텐츠 영역 */}
-      <div style={{ marginLeft: "240px", flex: 1, display: "flex", flexDirection: "column" }}>
-        {/* 상단 바 */}
-        <header style={{
-          height: "64px",
-          background: "#fff",
-          borderBottom: "1px solid #e5e7eb",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 24px",
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-        }}>
-          <div>
-            <h1 style={{ fontSize: "16px", fontWeight: "600", color: "#1f2937", margin: 0 }}>
-              {menuItems.find((m) => isActive(m.href))?.label ?? "관리자 패널"}
-            </h1>
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <button style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "#6b7280",
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-            }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-              </svg>
-              <span style={{
-                position: "absolute",
-                top: "-2px",
-                right: "-2px",
-                width: "8px",
-                height: "8px",
-                background: "#ef4444",
-                borderRadius: "50%",
-              }} />
-            </button>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <div style={{
-                width: "32px",
-                height: "32px",
-                background: "#1B2A3A",
-                borderRadius: "50%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontSize: "13px",
-                fontWeight: "600",
-              }}>
-                관
-              </div>
-              <span style={{ fontSize: "14px", color: "#374151", fontWeight: "500" }}>
-                {adminName}
-              </span>
-            </div>
-          </div>
-        </header>
+      {/* 메인 콘텐츠 */}
+      <div style={{ flex: 1, marginLeft: "220px", display: "flex", flexDirection: "column", minWidth: 0 }} className="admin-main">
+        {/* 상단 모바일 헤더 */}
+        <div
+          className="lg:hidden"
+          style={{ background: "#0F172A", padding: "14px 16px", display: "flex", alignItems: "center", gap: "12px", position: "sticky", top: 0, zIndex: 30 }}
+        >
+          <button
+            onClick={() => setSidebarOpen(true)}
+            style={{ background: "none", border: "none", color: "#94A3B8", cursor: "pointer", padding: "4px" }}
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+          <span style={{ fontSize: "14px", fontWeight: 600, color: "#fff", letterSpacing: "-0.01em" }}>더에이치 황해 관리자</span>
+        </div>
 
-        {/* 페이지 컨텐츠 */}
-        <main style={{ padding: "24px", flex: 1 }}>
+        <main style={{ flex: 1, padding: "32px 32px", maxWidth: "1160px" }} className="admin-content">
           {children}
         </main>
       </div>
+
+      <style>{`
+        @media (max-width: 1024px) {
+          .admin-main { margin-left: 0 !important; }
+          .admin-content { padding: 20px 16px !important; }
+        }
+      `}</style>
     </div>
   );
 }

@@ -27,7 +27,7 @@ const recentActivity = [
 
 const kpiCards = [
   { label: "총 신청건수", value: "28", accent: "#1B2A3A" },
-  { label: "진행중 단지", value: "4", accent: "#C4973A" },
+  { label: "진행중 단지", value: "4", accent: "#1B2A3A" },
   { label: "완료 단지", value: "7", accent: "#166534" },
   { label: "이번달 신청", value: "12", accent: "#1d4ed8" },
 ];
@@ -44,7 +44,7 @@ const activityDot = (type: string): React.CSSProperties => {
     new: "#1B2A3A",
     approve: "#166534",
     reject: "#dc2626",
-    update: "#C4973A",
+    update: "#1B2A3A",
     notice: "#1d4ed8",
   };
   return {

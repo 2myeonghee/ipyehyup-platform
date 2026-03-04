@@ -176,7 +176,7 @@ export default function DistrictsPage() {
             <Link
               href="/register/"
               className="inline-block px-8 py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90"
-              style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+              style={{ backgroundColor: "#1B2A3A", color: "#fff" }}
             >
               집단등기 신청하기 →
             </Link>

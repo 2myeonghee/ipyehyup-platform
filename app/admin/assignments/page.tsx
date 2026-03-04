@@ -234,7 +234,7 @@ export default function AssignmentsPage() {
                       <div style={{
                         height: "100%",
                         width: `${d.progress}%`,
-                        background: d.progress === 100 ? "#10b981" : "linear-gradient(90deg, #2C3E50, #C9A84C)",
+                        background: d.progress === 100 ? "#1B2A3A" : "linear-gradient(90deg, #2C3E50, #1B2A3A)",
                         borderRadius: "3px",
                       }} />
                     </div>

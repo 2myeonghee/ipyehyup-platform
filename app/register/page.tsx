@@ -322,7 +322,7 @@ export default function RegisterPage() {
                 <button
                   onClick={handleSubmit}
                   className="flex-1 py-3.5 rounded-xl font-bold text-sm transition-all hover:opacity-90"
-                  style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+                  style={{ backgroundColor: "#1B2A3A", color: "#fff" }}
                 >
                   신청 완료
                 </button>

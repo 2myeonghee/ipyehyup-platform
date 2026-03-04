@@ -128,7 +128,7 @@ export default function NoticesPage() {
                     cursor: "pointer",
                     transition: "all 0.1s",
                     ...(selectedDistrict === d
-                      ? { background: "rgba(44,62,80,0.08)", color: "#2C3E50", fontWeight: "600", borderLeft: "3px solid #C9A84C" }
+                      ? { background: "rgba(44,62,80,0.08)", color: "#2C3E50", fontWeight: "600", borderLeft: "3px solid #fff" }
                       : { background: "transparent", color: "#374151", fontWeight: "400" }),
                   }}
                 >
@@ -139,7 +139,7 @@ export default function NoticesPage() {
                       borderRadius: "20px",
                       fontSize: "11px",
                       fontWeight: "700",
-                      background: selectedDistrict === d ? "#C9A84C" : "#f3f4f6",
+                      background: selectedDistrict === d ? "#1B2A3A" : "#f3f4f6",
                       color: selectedDistrict === d ? "#fff" : "#6b7280",
                     }}>
                       {count}
@@ -179,7 +179,7 @@ export default function NoticesPage() {
               padding: "20px",
               marginBottom: "16px",
               boxShadow: "0 1px 3px rgba(0,0,0,0.07)",
-              border: "2px solid #C9A84C",
+              border: "2px solid #1B2A3A",
             }}>
               <h3 style={{ fontSize: "15px", fontWeight: "700", color: "#1f2937", margin: "0 0 16px" }}>
                 새 공지 작성 — {selectedDistrict}

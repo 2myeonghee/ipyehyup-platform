@@ -260,9 +260,9 @@ export default function CalculatorPage() {
             <a
               href="tel:032-251-1000"
               className="mt-4 block text-center py-3 rounded-xl text-sm font-semibold transition-all hover:opacity-90"
-              style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+              style={{ backgroundColor: "#1B2A3A", color: "#fff" }}
             >
-              📞 전문가 상담 받기 (032-251-1000)
+              전문가 상담 받기 (032-251-1000)
             </a>
           </div>
         </div>

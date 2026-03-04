@@ -196,7 +196,7 @@ export default async function DistrictDetailPage({ params }: PageProps) {
               <h2 className="font-bold text-base mb-4" style={{ color: "#2C3E50" }}>공지사항</h2>
               <div className="space-y-4">
                 {sampleNotices.map((n, i) => (
-                  <div key={i} className="border-l-2 pl-4 py-1" style={{ borderColor: "#C9A84C" }}>
+                  <div key={i} className="border-l-2 pl-4 py-1" style={{ borderColor: "#1B2A3A" }}>
                     <div className="flex items-center gap-2 mb-1">
                       <p className="font-semibold text-sm" style={{ color: "#2C3E50" }}>{n.title}</p>
                       <span className="text-xs text-gray-400">{n.date}</span>
@@ -225,7 +225,7 @@ export default async function DistrictDetailPage({ params }: PageProps) {
                   <div className="space-y-2 text-sm">
                     <a href={`tel:${district.phone}`}
                       className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-50 transition-colors justify-center">
-                      <span>📞</span>
+                      <span></span>
                       <span className="text-gray-600">{district.phone}</span>
                     </a>
                     <a href={`mailto:${district.email}`}
@@ -248,7 +248,7 @@ export default async function DistrictDetailPage({ params }: PageProps) {
               <Link
                 href="/register/"
                 className="block py-3 rounded-xl font-bold text-sm transition-all hover:opacity-90"
-                style={{ backgroundColor: "#C9A84C", color: "#2C3E50" }}
+                style={{ backgroundColor: "#1B2A3A", color: "#fff" }}
               >
                 신청하기 →
               </Link>
@@ -256,7 +256,7 @@ export default async function DistrictDetailPage({ params }: PageProps) {
                 href="tel:032-251-1000"
                 className="mt-2 block py-2.5 rounded-xl text-sm text-gray-600 border border-gray-200 hover:border-gray-400 transition-all"
               >
-                📞 전화 문의
+                전화 문의
               </a>
             </div>
           </div>
